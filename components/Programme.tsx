@@ -1,6 +1,6 @@
 "use client";
 import {useMemo,useState} from "react";
-import {days,films,screenings,type Film,type Genre,type Screening} from "@/data/films";
+import {days,films,screenings,type Film,type Screening} from "@/data/films";
 import {formatTime} from "@/lib/booking";
 import {FilmCard} from "./FilmCard";
 
@@ -9,7 +9,7 @@ export function Programme({onFilm,onScreening}:{onFilm:(film:Film)=>void;onScree
   const [genre,setGenre]=useState<(typeof genres)[number]>("All films");
   const [query,setQuery]=useState("");
   const [day,setDay]=useState<string>(days[0].id);
-  const visible=useMemo(()=>films.filter(film=>(genre==="All films"||film.genre===genre as Genre)&&`${film.title} ${film.director} ${film.genre}`.toLowerCase().includes(query.trim().toLowerCase())),[genre,query]);
+  const visible=useMemo(()=>films.filter(film=>(genre==="All films"||film.genre===genre)&&`${film.title} ${film.director} ${film.genre}`.toLowerCase().includes(query.trim().toLowerCase())),[genre,query]);
   const dayScreenings=screenings.filter(screening=>screening.day===day);
   return <section className="section programme" id="programme" aria-labelledby="programme-heading">
     <div className="section-heading"><div><span className="eyebrow">01 / THE PROGRAMME</span><h2 id="programme-heading">Stories worth <em>stepping into.</em></h2></div><p>Six original stories, five days on the calendar. Find the film that stays with you.</p></div>

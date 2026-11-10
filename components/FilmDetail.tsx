@@ -1,6 +1,6 @@
 "use client";
 import {useEffect,useRef} from "react";
-import {films,screenings,type Film,type Screening} from "@/data/films";
+import {screenings,type Film,type Screening} from "@/data/films";
 import {formatTime} from "@/lib/booking";
 import {FilmArtwork} from "./FilmArtwork";
 

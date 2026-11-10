@@ -1,7 +1,8 @@
+import type { CSSProperties } from "react";
 import type { Film } from "@/data/films";
 
 export function FilmArtwork({film,hero=false}:{film:Film;hero?:boolean}){
-  return <div className={`film-art film-art--${film.motif}${hero?" film-art--hero":""}`} style={{"--poster-base":film.palette,"--poster-accent":film.accent} as React.CSSProperties} role="img" aria-label={`Original abstract artwork for ${film.title}`}>
+  return <div className={`film-art film-art--${film.motif}${hero?" film-art--hero":""}`} style={{"--poster-base":film.palette,"--poster-accent":film.accent} as CSSProperties} role="img" aria-label={`Original abstract artwork for ${film.title}`}>
     <div className="film-art__grain" aria-hidden="true"/>
     <div className="film-art__shape film-art__shape--one" aria-hidden="true"/>
     <div className="film-art__shape film-art__shape--two" aria-hidden="true"/>

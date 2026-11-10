@@ -19,7 +19,7 @@ export function CinemaApp(){
     <Programme onFilm={setFilm} onScreening={openScreening}/>
     <section className="visit" id="visit" aria-labelledby="visit-heading"><div className="visit__badge">✳</div><div><span className="eyebrow">03 / THE EXPERIENCE</span><h2 id="visit-heading">Stay for the <em>afterglow.</em></h2><p>Velvet Frame is an imagined independent cinema experience: thoughtful programming, an intimate room, and a little time to linger. All screenings and seats shown here are illustrative.</p><a href="#showtimes" className="button button--cream">Find your screening <span aria-hidden="true">↗</span></a></div><div className="visit__details"><div><span>THE GRAND</span><strong>Wide screen. Warm lights.</strong><p>Room for the stories that need a little more space.</p></div><div><span>THE STUDIO</span><strong>Closer to the story.</strong><p>An intimate setting for films worth leaning into.</p></div><div><span>ACCESS</span><strong>Everyone belongs.</strong><p>Step-free access and assistive listening at every show.</p></div></div></section>
     </main><footer className="site-footer"><a className="brand brand--footer" href="#top"><span className="brand__symbol" aria-hidden="true">✳</span><span>VELVET<br/>FRAME</span></a><p>A cinema night, composed. An original illustrative portfolio experience.</p><a href="#top">Back to top ↑</a></footer></div>
-    {film&&<FilmDetail film={film} onClose={()=>setFilm(null)} onScreening={openScreening}/ >}
-    {screening&&<SeatPicker key={screening.id} screening={screening} onClose={()=>setScreening(null)}/ >}
+    {film&&<FilmDetail film={film} onClose={()=>setFilm(null)} onScreening={openScreening}/>}
+    {screening&&<SeatPicker key={screening.id} screening={screening} onClose={()=>setScreening(null)}/>}
   </>;
 }
