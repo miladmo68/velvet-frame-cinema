@@ -47,7 +47,7 @@ npm run build
 npm run qa:browser
 ```
 
-`qa:browser` runs against the production export in a cloud GitHub Actions runner and writes authentic desktop and phone screenshots to `public/screenshots/`. The release workflow generates the lockfile, executes all checks and captures screenshots before creating the public repository. The [release report](PROJECT_REPORT.md) lists the feature inventory and quality gate.
+`qa:browser` runs against the production export in a cloud GitHub Actions runner using its preinstalled Google Chrome and writes authentic desktop and phone screenshots to `public/screenshots/`. The release workflow generates the lockfile, executes all checks with the runner's system Chrome and captures screenshots before creating the public repository. The [release report](PROJECT_REPORT.md) lists the feature inventory and quality gate.
 
 ## Deployment
 

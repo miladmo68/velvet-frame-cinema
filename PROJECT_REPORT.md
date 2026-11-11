@@ -17,6 +17,6 @@ Domain: independent cinema discovery and illustrative seat planning. Primary use
 
 ## Verification
 
-The factory publisher runs `npm ci`, `npm run validate` (`lint`, `typecheck`, domain tests and production build), `npx playwright install --with-deps chromium`, and `npm run qa:browser` before publication. `qa:browser` captures `public/screenshots/desktop.png` and `public/screenshots/mobile.png` from the running production export. Run results and public Pages status must be verified from the relevant GitHub Actions runs before this report is considered complete. No unverified pass is claimed here.
+The factory publisher runs `npm ci`, `npm run validate` (`lint`, `typecheck`, domain tests and production build), `PLAYWRIGHT_USE_SYSTEM_CHROME=1 npm run qa:browser` on the runner's preinstalled Google Chrome before publication. `qa:browser` captures `public/screenshots/desktop.png` and `public/screenshots/mobile.png` from the running production export. Run results and public Pages status must be verified from the relevant GitHub Actions runs before this report is considered complete. No unverified pass is claimed here.
 
 Public links: [repository](https://github.com/miladmo68/velvet-frame-cinema) · [live demo](https://miladmo68.github.io/velvet-frame-cinema/).

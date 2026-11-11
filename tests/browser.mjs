@@ -6,7 +6,7 @@ const root=join(process.cwd(),'out');
 const origin='https://preview.velvet-frame.invalid';
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript','.css':'text/css','.json':'application/json','.png':'image/png','.svg':'image/svg+xml','.ico':'image/x-icon','.woff2':'font/woff2'};
 const assert=(condition,message)=>{if(!condition)throw new Error(message);};
-const browser=await chromium.launch({headless:true});
+const browser=await chromium.launch({headless:true,...(process.env.PLAYWRIGHT_USE_SYSTEM_CHROME ? {channel:'chrome'} : {})});
 await mkdir('public/screenshots',{recursive:true});
 try{
   for(const [name,viewport] of [['desktop',{width:1440,height:900}],['mobile',{width:390,height:844}]]){
