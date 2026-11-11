@@ -27,7 +27,19 @@ try{
     assert(response?.status()===200,`${name}: production HTML`);
     assert(await page.getByRole('heading',{name:/A little more wonder/i}).isVisible(),`${name}: hero`);
     assert(await page.locator('.film-art').count()>=6,`${name}: original poster art`);
-    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),`${name}: horizontal overflow`);
+    const overflow=await page.evaluate(()=>{
+      const width=document.documentElement.scrollWidth,viewport=innerWidth;
+      const offenders=[...document.querySelectorAll('body *')].filter(el=>{
+        const rect=el.getBoundingClientRect();
+        if(rect.right<=viewport+2||rect.width===0)return false;
+        for(let parent=el.parentElement;parent;parent=parent.parentElement){
+          if(/auto|hidden|scroll|clip/.test(getComputedStyle(parent).overflowX))return false;
+        }
+        return true;
+      }).slice(0,8).map(el=>({element:el.tagName.toLowerCase(),className:String(el.className).slice(0,90),right:Math.round(el.getBoundingClientRect().right)}));
+      return {width,viewport,offenders};
+    });
+    assert(overflow.width<=overflow.viewport+2,`${name}: horizontal overflow ${JSON.stringify(overflow)}`);
     await page.screenshot({path:`public/screenshots/${name}.png`,fullPage:true});
     for(const [label,target] of [['Films','#programme'],['Showtimes','#showtimes'],['The cinema','#visit']]){
       await page.getByRole('navigation',{name:'Main navigation'}).getByRole('link',{name:label}).click();
