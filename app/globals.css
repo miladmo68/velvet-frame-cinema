@@ -10,3 +10,12 @@
 .screenings-empty{padding:34px 10px;border-bottom:1px solid var(--line)}.screenings-empty strong{font:23px Georgia,serif}.screenings-empty p{color:var(--muted);font-size:13px;margin:10px 0}
 
 .seat-scroll-hint{display:none;color:var(--muted);font-size:11px;text-align:center;margin:0 0 12px}@media(max-width:760px){.seat-scroll-hint{display:block}}
+
+/* Keep long programme content inside narrow phone grids without clipping controls. */
+@media(max-width:760px){
+  .hero__copy,.hero__visual,.programme,.showtimes,.visit>div,.screening-row__film,.screening-row__action{min-width:0}
+  .screening-row{grid-template-columns:95px minmax(0,1fr)}
+  .screening-row__action{flex-wrap:wrap}
+  .section-heading h2,.visit h2,.film-card h3,.screening-row__film h3,.visit__details strong{overflow-wrap:break-word}
+  .genre-tabs,.date-row{max-width:100%}
+}
