@@ -14,11 +14,11 @@ function isPreview(value:unknown):value is SavedPreview{
 }
 export function savePreview(item:SavedPreview):SavedPreview[]{
   const next=[item,...readPreviews()].slice(0,12);
-  try{localStorage.setItem(key,JSON.stringify(next));}catch{}
+  try{localStorage.setItem(key,JSON.stringify(next));}catch{return next;}
   return next;
 }
 export function removePreview(id:string):SavedPreview[]{
   const next=readPreviews().filter(item=>item.id!==id);
-  try{localStorage.setItem(key,JSON.stringify(next));}catch{}
+  try{localStorage.setItem(key,JSON.stringify(next));}catch{return next;}
   return next;
 }
