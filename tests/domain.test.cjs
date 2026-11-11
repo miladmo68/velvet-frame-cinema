@@ -28,3 +28,13 @@ test('preview validation checks seat inventory, ticket count and contact fields'
   assert.match(bookingError(screening,[seat],mix,'M','milad@example.com'),/name/);
   assert.match(bookingError(screening,[seat],mix,'Milad Mohammadi','invalid'),/email/);
 });
+
+const {readPreviews,savePreview,removePreview}=require('../.test-dist/lib/previews.js');
+test('local previews recover from malformed storage and can be removed',()=>{
+  const oldWindow=global.window,oldStorage=global.localStorage;
+  const store=new Map();global.window={};global.localStorage={getItem:key=>store.get(key)||null,setItem:(key,value)=>store.set(key,value)};
+  try{store.set('velvet-frame-previews-v1','not json');assert.deepEqual(readPreviews(),[]);
+    const preview={id:'test-1',screeningId:screenings[0].id,seats:[allSeats.find(seat=>!screenings[0].occupied.includes(seat))],tickets:{adult:1,student:0,senior:0},name:'Alex Rivera',createdAt:'2026-11-11T12:00:00.000Z'};
+    assert.equal(savePreview(preview).length,1);assert.equal(readPreviews()[0].name,'Alex Rivera');assert.deepEqual(removePreview('test-1'),[]);
+  }finally{global.window=oldWindow;global.localStorage=oldStorage;}
+});
