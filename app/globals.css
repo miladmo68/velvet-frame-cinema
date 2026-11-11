@@ -19,3 +19,6 @@
   .section-heading h2,.visit h2,.film-card h3,.screening-row__film h3,.visit__details strong{overflow-wrap:break-word}
   .genre-tabs,.date-row{max-width:100%}
 }
+
+/* Keep the tall hero artwork fluid inside phone viewports. */
+@media(max-width:760px){.hero__visual{width:100%}.hero__visual .film-art--hero{width:100%;aspect-ratio:auto}}
