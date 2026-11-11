@@ -1,0 +1,10 @@
+"use client";
+import {useEffect,useRef} from 'react';
+import {getFilm,getScreening} from '@/data/films';
+import {formatMoney,ticketTotal} from '@/lib/booking';
+import type {SavedPreview} from '@/lib/previews';
+export function PlansDrawer({items,onClose,onRemove}:{items:SavedPreview[];onClose:()=>void;onRemove:(id:string)=>void}){
+  const closeRef=useRef<HTMLButtonElement>(null);
+  useEffect(()=>{closeRef.current?.focus();const key=(event:KeyboardEvent)=>{if(event.key==='Escape')onClose();};document.addEventListener('keydown',key);return()=>document.removeEventListener('keydown',key);},[onClose]);
+  return <div className="overlay overlay--drawer" onMouseDown={event=>{if(event.target===event.currentTarget)onClose();}}><section role="dialog" aria-modal="true" aria-labelledby="plans-title" className="plans-drawer"><header><div><span className="eyebrow">YOUR LOCAL PREVIEWS</span><h2 id="plans-title">Evenings in the <em>making.</em></h2></div><button ref={closeRef} type="button" className="icon-button" onClick={onClose} aria-label="Close your plans">×</button></header>{items.length?<div className="plan-list">{items.map(item=>{const screening=getScreening(item.screeningId);const film=screening&&getFilm(screening.filmId);if(!film||!screening)return null;return <article className="plan-card" key={item.id}><span className="eyebrow">ILLUSTRATIVE PREVIEW · NO TICKET ISSUED</span><h3>{film.title}</h3><p>{screening.day} · {screening.time} · {screening.room}</p><div><span>Seats {item.seats.join(', ')}</span><strong>{formatMoney(ticketTotal(item.tickets))}</strong></div><button type="button" className="text-link" onClick={()=>onRemove(item.id)}>Remove preview</button></article>;})}</div>:<div className="empty-state"><span aria-hidden="true">✳</span><h3>No evenings planned yet</h3><p>Choose a screening and seats to create a local preview.</p><button type="button" className="button button--dark" onClick={onClose}>Explore screenings</button></div>}<p className="plans-note">These previews live only in this browser. They do not hold seats or send a booking.</p></section></div>;
+}
