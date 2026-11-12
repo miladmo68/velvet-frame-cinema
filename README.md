@@ -28,7 +28,7 @@ An original, customer-facing independent cinema experience. Explore an editorial
 
 Next.js 16 App Router, React 19, TypeScript, custom CSS, Node domain tests, Playwright Chromium, GitHub Actions and GitHub Pages. The catalogue and seating model live in typed deterministic modules. Browser localStorage holds only illustrative plan details; the form email is validated but never persisted or sent. There is no backend transaction or real-world booking.
 
-All poster artwork and interface code are original. See [attribution and research notes](ATTRIBUTIONS.md) and [product rotation notes](PRODUCT_NOTES.md).
+All poster artwork and interface code are original. See [attribution notes](ATTRIBUTIONS.md).
 
 ## Development
 
@@ -47,7 +47,7 @@ npm run build
 npm run qa:browser
 ```
 
-`qa:browser` runs against the production export in a cloud GitHub Actions runner using its preinstalled Google Chrome and writes authentic desktop and phone screenshots to `public/screenshots/`. The release workflow generates the lockfile, executes all checks with the runner's system Chrome and captures screenshots before creating the public repository. The [release report](PROJECT_REPORT.md) lists the feature inventory and quality gate.
+`qa:browser` runs Playwright against the production export at desktop and phone sizes and writes the screenshots to `public/screenshots/`.
 
 ## Deployment
 
